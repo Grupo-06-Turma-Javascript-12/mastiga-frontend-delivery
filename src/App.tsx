@@ -1,24 +1,28 @@
-import { BrowserRouter, Routes } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { ToastContainer } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css'
+import { AuthProvider } from "./contexts/AuthContext"
+
+import Produtos from "./pages/produtos/Produtos"
 
 function App() {
   return (
-    <>
-      <AuthProvider>
-        <ToastContainer />
-        <BrowserRouter>
-          <Navbar />
-          <div className="min-h-[80vh]">
-            <Routes>
+    <AuthProvider>
+      <ToastContainer />
+      <BrowserRouter>
+        {/* <Navbar /> */}
 
-            </Routes>
-          </div>
-          <Footer />
-        </BrowserRouter>
-      </AuthProvider>
-    </>
-  );
+        <div className="min-h-[80vh]">
+          <Routes>
+            {/* <Route path="/" element={<Home />} /> */}
+            <Route path="/produtos" element={<Produtos />} />
+          </Routes>
+        </div>
+
+        {/* <Footer /> */}
+      </BrowserRouter>
+    </AuthProvider>
+  )
 }
 
-export default App;
+export default App
