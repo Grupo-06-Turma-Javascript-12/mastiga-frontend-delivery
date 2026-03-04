@@ -83,7 +83,7 @@ function DeletarProduto() {
 
             <div className='border flex flex-col rounded-2xl overflow-hidden justify-between'>
                 <header 
-                    className='py-2 px-6 bg-indigo-600 text-white font-bold text-2xl'>
+                    className='py-2 px-6 bg-green-600 text-white font-bold text-2xl'>
                     Produto
                 </header>
                 <div className="p-4">
@@ -97,7 +97,7 @@ function DeletarProduto() {
                         Não
                     </button>
                     <button 
-                        className='w-full text-slate-100 bg-indigo-400 
+                        className='w-full text-slate-100 bg-green-400 
                         hover:bg-indigo-600 flex items-center justify-center'
                         onClick={deletarProduto}>
 

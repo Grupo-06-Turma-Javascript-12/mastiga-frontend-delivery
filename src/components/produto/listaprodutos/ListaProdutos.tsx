@@ -47,40 +47,39 @@ function ListaProdutos() {
     }
 
     return (
-        <>
+      <>
+        {isLoading && (
+          <div className="flex justify-center w-full my-12">
+            <SyncLoader
+              color="#15803d"
+              size={18}
+            />
+          </div>
+        )}
 
-            {isLoading && (
-                <div className="flex justify-center w-full my-8">
-                    <SyncLoader
-                        color="#312e81"
-                        size={32}
-                    />
-                </div>
+        <div className="flex justify-center w-full py-8 bg-gray-100 min-h-screen">
+          <div className="container px-4">
+
+            {(!isLoading && produtos.length === 0) && (
+              <div className="text-center my-16">
+                <h2 className="text-2xl font-semibold text-[#15803d]">
+                  Nenhum produto encontrado
+                </h2>
+                <p className="text-gray-500 mt-2">
+                  Novos produtos em breve 🍔
+                </p>
+              </div>
             )}
 
-            <div className="flex justify-center w-full my-4">
-                <div className="container flex flex-col">
-
-                    {(!isLoading && produtos.length === 0) && (
-                            <span className="text-3xl text-center my-8">
-                                Nenhum Produto foi encontrado!
-                            </span>
-                    )}
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 
-                                    lg:grid-cols-4 px-4 gap-8">
-                            {
-                                produtos.map((produto) => {
-                                    console.log("Produto:", produto);
-
-                                    return (
-                                    <CardProduto key={produto.id} produto={produto}/>
-                                )})
-                            }
-                    </div>
-                </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+              {produtos.map((produto) => (
+                <CardProduto key={produto.id} produto={produto} />
+              ))}
             </div>
-        </>
+
+          </div>
+        </div>
+      </>
     )
 }
 export default ListaProdutos;

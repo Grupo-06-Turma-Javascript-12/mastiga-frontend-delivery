@@ -152,7 +152,7 @@ function FormProduto() {
             placeholder="Nome"
             name="nome"
             required
-            className="border-2 border-slate-700 rounded p-2"
+            className="border-2 border-orange-700 rounded p-2"
             value={produto.nome}
             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
           />
@@ -165,7 +165,7 @@ function FormProduto() {
             placeholder="Preço"
             name="preco"
             required
-            className="border-2 border-slate-700 rounded p-2"
+            className="border-2 border-orange-700 rounded p-2"
             value={produto.preco}
             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
           />
@@ -173,7 +173,7 @@ function FormProduto() {
 
         <div className="flex flex-col gap-2">
           <p>Categoria do Produto</p>
-          <select name="categoria" id="categoria" className="border p-2 border-slate-800 rounded"
+          <select name="categoria" id="categoria" className="border p-2 border-orange-700 rounded"
             onChange={(e) => buscarCategoriaPorId(e.currentTarget.value)}>
             <option value="" selected disabled>Selecione uma Categoria</option>
 
@@ -188,7 +188,7 @@ function FormProduto() {
 
         <button
           type='submit'
-          className='rounded disabled:bg-slate-200 bg-indigo-400 hover:bg-indigo-800 text-white font-bold w-1/2 mx-auto py-2 flex justify-center'
+          className='rounded disabled:bg-slate-200 bg-green-600 hover:bg-green-800 text-white font-bold w-1/2 mx-auto py-2 flex justify-center'
           disabled={carregandoCategoria}
         >
           { isLoading ?
