@@ -70,11 +70,12 @@ return (
 
             {dropdownOpen && (
               <div className="absolute top-full left-0 mt-2 bg-[#c8a165] rounded-xl shadow-xl p-2 min-w-40 z-50">
-                <Link to='/categorias/a' className="block px-4 py-2 rounded-lg text-green-800 hover:bg-green-600 transition-all">A</Link>
-                <Link to='/categorias/b' className="block px-4 py-2 rounded-lg text-green-800 hover:bg-green-600 transition-all">B</Link>
-                <Link to='/categorias/c' className="block px-4 py-2 rounded-lg text-green-800 hover:bg-green-600 transition-all">C</Link>
-                <Link to='/categorias/d' className="block px-4 py-2 rounded-lg text-green-800 hover:bg-green-600 transition-all">D</Link>
-                <Link to='/categorias/e' className="block px-4 py-2 rounded-lg text-green-800 hover:bg-green-600 transition-all">E</Link>
+                <Link to='/categorias/bebidas' className="block px-4 py-2 rounded-lg text-green-800 hover:bg-white transition-all">Bebidas</Link>
+                <Link to='/categorias/massas' className="block px-4 py-2 rounded-lg text-green-800 hover:bg-white transition-all">Massas</Link>
+                <Link to='/categorias/pizzasintegrais' className="block px-4 py-2 rounded-lg text-green-800 hover:bg-white transition-all">Pizzas Integrais</Link>
+                <Link to='/categorias/saladas' className="block px-4 py-2 rounded-lg text-green-800 hover:bg-white transition-all">Saladas</Link>
+                <Link to='/categorias/sopas' className="block px-4 py-2 rounded-lg text-green-800 hover:bg-white transition-all">Sopas</Link>
+                <Link to='/categorias/sobremesas' className="block px-4 py-2 rounded-lg text-green-800 hover:bg-white transition-all">Sobremesas</Link>
               </div>
             )}
           </div>
