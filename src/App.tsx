@@ -1,7 +1,9 @@
-import { BrowserRouter, Routes } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import CardCategoria from "./components/categoria/cardcategoria/CardCategoria";
+import Navbar from "./components/navbar/Navbar";
+import { AuthProvider } from "./contexts/AuthContext";
+import Footer from "./components/footer/Footer"
 
 function App() {
   return (
@@ -9,20 +11,15 @@ function App() {
       <AuthProvider>
         <ToastContainer />
         <BrowserRouter>
-          <Navbar />
+          
           <div className="min-h-[80vh]">
             <Routes>
-            <CardCategoria Categoria={{ 
-              id: 1,
-              descricao: "qual quer coisaaaaaa"
-            }}></CardCategoria>
-            </Routes>
-          </div>
-          <Footer />
-        </BrowserRouter>
-      </AuthProvider>
-    </>
-  );
+              
+
+        {/* <Footer /> */}
+      </BrowserRouter>
+    </AuthProvider>
+  )
 }
 
-export default App;
+export default App
