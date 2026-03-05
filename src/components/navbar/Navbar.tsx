@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import { useState } from "react"
+import { ShoppingCartIcon } from "@phosphor-icons/react"
 
 function Navbar() {
 
@@ -22,8 +23,8 @@ function Navbar() {
       <div className="container mx-auto px-8 py-4 flex justify-between items-center">
         
         <Link to='/home' className="flex items-center gap-2 md:gap-6">
-           <img src="https://ik.imagekit.io/kef5ubks6/Logo1mastiga.png" alt="ícone" className="h-10 md:h-20 w-auto object-contain" />
-           <img src="https://ik.imagekit.io/kef5ubks6/Logo2mastiga.webp" alt="Mastiga Delivery" className="h-8 md:h-19 w-auto object-contain" />
+          <img src="https://ik.imagekit.io/kef5ubks6/Logo1mastiga.png" alt="ícone" className="h-10 md:h-20 w-auto object-contain" />
+          <img src="https://ik.imagekit.io/kef5ubks6/Logo2mastiga.webp" alt="Mastiga Delivery" className="h-8 md:h-19 w-auto object-contain" />
         </Link>
 
         <div className="hidden lg:flex gap-2 items-center">
@@ -49,8 +50,9 @@ function Navbar() {
           <Link to='/sobrenos' className={linkClass} style={linkStyle} onMouseEnter={onEnter} onMouseLeave={onLeave}>Sobre Nós</Link>
           <Link to='/sair' className={linkClass} style={linkStyle} onMouseEnter={onEnter} onMouseLeave={onLeave}>Sair</Link>
 
+          {/* Carrinho desktop */}
           <Link to='/carrinho' className={`relative ${linkClass}`} style={linkStyle} onMouseEnter={onEnter} onMouseLeave={onLeave}>
-            🛒
+            <ShoppingCartIcon size={20} weight="fill" />
             <span className="absolute -top-1 -right-1 bg-white text-green-700 text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
           </Link>
         </div>
@@ -85,8 +87,11 @@ function Navbar() {
 
           <Link to='/sobrenos' className="py-2 font-semibold border-b border-white/20 text-white/90 hover:text-white" onClick={() => setMenuOpen(false)}>Sobre Nós</Link>
           <Link to='/sair' className="py-2 font-semibold border-b border-white/20 text-white/90 hover:text-white" onClick={() => setMenuOpen(false)}>Sair</Link>
+
+          {/* Carrinho mobile */}
           <Link to='/carrinho' className="py-2 font-semibold text-white/90 hover:text-white flex items-center gap-2" onClick={() => setMenuOpen(false)}>
-            🛒 Carrinho
+            <ShoppingCartIcon size={20} weight="fill" />
+            Carrinho
             <span className="bg-white text-green-700 text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
           </Link>
         </div>
