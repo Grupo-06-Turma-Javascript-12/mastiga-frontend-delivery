@@ -1,6 +1,10 @@
-import { BrowserRouter, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { AuthProvider } from "./contexts/AuthContext";
+
+
+
 
 function App() {
   return (
@@ -8,13 +12,14 @@ function App() {
       <AuthProvider>
         <ToastContainer />
         <BrowserRouter>
-          <Navbar />
+          
           <div className="min-h-[80vh]">
             <Routes>
-
+              
+            
             </Routes>
           </div>
-          <Footer />
+          
         </BrowserRouter>
       </AuthProvider>
     </>
