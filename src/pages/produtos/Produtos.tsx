@@ -62,7 +62,6 @@ export default function Produtos() {
   return (
     <main className="container mx-auto px-6 py-8">
 
-      {/* Topo: busca + botão carrinho */}
       <div className="flex flex-col sm:flex-row gap-4 items-center justify-between mb-6">
         <input
           type="text"
@@ -85,7 +84,7 @@ export default function Produtos() {
         </button>
       </div>
 
-      {/* Filtros por categoria */}
+    
       <div className="flex gap-2 flex-wrap mb-8">
         {CATEGORIAS.map((cat) => (
           <button
@@ -102,7 +101,7 @@ export default function Produtos() {
         ))}
       </div>
 
-      {/* Grid de produtos */}
+
       {produtosFiltrados.length === 0 ? (
         <p className="text-center text-gray-400 py-20">
           Nenhum produto encontrado.
@@ -119,7 +118,7 @@ export default function Produtos() {
         </div>
       )}
 
-      {/* Carrinho lateral */}
+ 
       <Carrinho
         itens={carrinho}
         aberto={carrinhoAberto}
