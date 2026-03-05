@@ -54,7 +54,7 @@ function Footer() {
       </div>
 
       {/* RODAPÉ INFERIOR */}
-      <div className="border-t border-white/20 py-4 px-8">
+      <div className="py-4 px-8" style={{ backgroundColor: '#14532d' }}>
         <div className="container mx-auto flex flex-col md:flex-row justify-between items-center text-white/50 text-sm gap-2">
           <p>© Mastiga Delivery {data} — Todos os direitos reservados.</p>
           <p>Comida saudável feita com amor pela equipe Mastiga 🥗</p>
