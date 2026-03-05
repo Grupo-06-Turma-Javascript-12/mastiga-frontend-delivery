@@ -8,10 +8,8 @@ function Footer() {
   return (
     <footer className="text-white" style={{ background: 'linear-gradient(to right, #15803d, #e0992e)' }}>
       
-      {/* CONTEÚDO PRINCIPAL */}
       <div className="container mx-auto px-8 py-12 grid grid-cols-1 md:grid-cols-3 gap-10">
         
-        {/* LOGO + DESCRIÇÃO */}
         <div className="flex flex-col gap-4">
           <Link to='/home' className="flex items-center gap-4">
             <img 
@@ -35,7 +33,6 @@ function Footer() {
           </div>
         </div>
 
-        {/* NAVEGAÇÃO */}
         <div className="flex flex-col gap-3">
           <p className="text-xs font-semibold tracking-widest text-white/50 uppercase mb-2">Navegação</p>
           <Link to="/home" className="text-white/80 hover:text-white transition-colors duration-200">Home</Link>
@@ -44,7 +41,6 @@ function Footer() {
           <Link to="/carrinho" className="text-white/80 hover:text-white transition-colors duration-200">Carrinho</Link>
         </div>
 
-        {/* CONTATO */}
         <div className="flex flex-col gap-3">
           <p className="text-xs font-semibold tracking-widest text-white/50 uppercase mb-2">Contato</p>
           <p className="text-white/80 text-sm">✉ mastiga@delivery.com</p>
@@ -53,7 +49,6 @@ function Footer() {
 
       </div>
 
-      {/* RODAPÉ INFERIOR */}
       <div className="py-4 px-8" style={{ backgroundColor: '#14532d' }}>
         <div className="container mx-auto flex flex-col md:flex-row justify-between items-center text-white/50 text-sm gap-2">
           <p>© Mastiga Delivery {data} — Todos os direitos reservados.</p>

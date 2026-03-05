@@ -5,6 +5,9 @@ import Footer from "./components/footer/Footer";
 import Navbar from "./components/navbar/Navbar";
 import { AuthProvider } from "./contexts/AuthContext";
 import Home from "./pages/home/Home";
+import Login from "./pages/login/Login";
+import SobreNos from "./pages/sobrenos/Sobrenos";
+
 
 function App() {
   return (
@@ -17,6 +20,13 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />}></Route>
               <Route path="/home" element={<Home />}></Route>
+              <Route path="/login" element={<Login />}></Route>
+              <Route path="/sobrenos" element={<SobreNos />}></Route>
+              <Route path="/home" element={<Home />}></Route>
+              <Route path="/home" element={<Home />}></Route>
+              <Route path="/home" element={<Home />}></Route>
+              <Route path="/home" element={<Home />}></Route>
+              
             </Routes>
           </div>
           <Footer />
