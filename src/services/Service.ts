@@ -10,18 +10,6 @@ export const cadastrarUsuario = async (url: string, dados: Object, setDados: Fun
   setDados(resposta.data)
 }
 
-cadastrarUsuario(
-  "sdddcccfcc", 
-  
-  { id: 1,
-    nome: "lilou"
-   },
-   setUser
-
-)
-
-
-
 // eslint-disable-next-line @typescript-eslint/no-wrapper-object-types
 export const login = async (url: string, dados: Object, setDados: Function) => {
   const resposta = await api.post(url, dados)
