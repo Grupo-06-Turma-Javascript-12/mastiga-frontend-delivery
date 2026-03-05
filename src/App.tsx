@@ -16,13 +16,10 @@ function App() {
             <Routes>
               
 
-            </Routes>
-          </div>
-          <Footer />
-        </BrowserRouter>
-      </AuthProvider>
-    </>
-  );
+        {/* <Footer /> */}
+      </BrowserRouter>
+    </AuthProvider>
+  )
 }
 
-export default App;
+export default App
