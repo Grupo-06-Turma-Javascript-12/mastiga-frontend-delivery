@@ -1,12 +1,17 @@
-import { useState, useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import {
-  Leaf,
   EyeIcon,
   EyeSlashIcon,
   FireIcon,
+  Leaf,
   X,
 } from "@phosphor-icons/react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
+import { AuthContext } from "../../contexts/AuthContext";
+import type { Usuario } from "../../models/Usuario";
+import { cadastrarUsuario } from "../../services/Service";
+import { ToastAlerta } from "../../utils/ToastAlerta";
 
 const videos = [
   "https://ik.imagekit.io/ycn9hqmaw/motion2Fast_Vibrant_highdefinition_closeup_shot_of_a_colorful__0.mp4",
@@ -22,11 +27,22 @@ const produtos = [
   { id: 6, nome: "Tapioca Recheada", preco: "R$ 18,90", img: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=300&h=200&fit=crop" },
 ];
 
+
 function Home() {
   const navigate = useNavigate();
   const [current, setCurrent] = useState(0);
   const [modalAberto, setModalAberto] = useState(false);
-  const [form, setForm] = useState({ nome: "", email: "", telefone: "", senha: "", confirmarSenha: "" });
+  const [usuario, setUsuario] = useState<Usuario>({
+  id: 0,
+  nome: "",
+  usuario: "",
+  senha: "",
+  foto: ""
+  });
+
+  const { handleLogin, isLoading: isLoadingLogin, usuario: usuarioLogado } = useContext(AuthContext)
+  const [confirmarSenha, setConfirmarSenha] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [enviado, setEnviado] = useState(false);
   const [verSenha, setVerSenha] = useState(false);
   const [verConfirmarSenha, setVerConfirmarSenha] = useState(false);
@@ -67,25 +83,68 @@ function Home() {
     }
   }
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setForm({ ...form, [e.target.name]: e.target.value });
+  function atualizarEstado(e: React.ChangeEvent<HTMLInputElement>) {
+  setUsuario({
+    ...usuario,
+    [e.target.name]: e.target.value
+  });
+  }
+
+  function handleConfirmarSenha(e: React.ChangeEvent<HTMLInputElement>) {
+  setConfirmarSenha(e.target.value);
   }
 
   function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    console.log("Cadastro:", form);
-    setEnviado(true);
+  e.preventDefault();
+  console.log("Cadastro:");
+  setEnviado(true);
   }
 
   function handleLoginChange(e: React.ChangeEvent<HTMLInputElement>) {
     setLoginForm({ ...loginForm, [e.target.name]: e.target.value });
   }
 
-  function handleLoginSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    console.log("Login:", loginForm);
-    setModalAberto(false);
-    navigate("/conhecercardapio");
+  async function handleLoginSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    await handleLogin({
+      id: 0,
+      nome: "",
+      foto: "",
+      token: "",
+      usuario: loginForm.email,
+      senha: loginForm.senha
+    })
+  setModalAberto(false)
+  navigate('/produtos')
+}
+
+  async function cadastrarNovoUsuario(e: React.FormEvent<HTMLFormElement>) {
+  e.preventDefault();
+
+  if (confirmarSenha === usuario.senha && usuario.senha.length >= 8) {
+
+    setIsLoading(true);
+
+    try {
+      await cadastrarUsuario('/usuarios/cadastrar', usuario, setUsuario);
+      ToastAlerta('Usuário cadastrado com sucesso!', 'sucesso');
+      setEnviado(true);
+    } catch (error) {
+      ToastAlerta('Erro ao cadastrar o usuário!', 'erro');
+    }
+
+  } else {
+
+    ToastAlerta(
+      'Dados do usuário inconsistentes! Verifique as informações.',
+      'erro'
+    );
+
+    setUsuario({ ...usuario, senha: "" });
+    setConfirmarSenha("");
+  }
+
+  setIsLoading(false);
   }
 
   return (
@@ -156,7 +215,7 @@ function Home() {
                 type="submit"
                 className="w-full py-4 bg-[#539b37] text-white font-bold rounded-xl hover:brightness-110 transition-all duration-300 text-lg"
               >
-                Entrar
+                {isLoadingLogin ? <ClipLoader color="#ffffff" size={24} /> : "Entrar"}
               </button>
 
               <p className="text-center text-sm text-slate-500">
@@ -210,7 +269,7 @@ function Home() {
               de uma alimentação de qualidade, sem abrir mão do sabor!
             </p>
             <button
-              onClick={() => setModalAberto(true)}
+              onClick={() => usuarioLogado.token !== '' ? navigate('/produtos') : setModalAberto(true)}
               className="px-8 py-4 bg-[#e0992e] text-white font-semibold rounded-lg hover:brightness-110 transition-all duration-300 text-lg"
             >
               Hora de mastigar! - Cardápio Online
@@ -295,24 +354,42 @@ function Home() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+              <form onSubmit={cadastrarNovoUsuario} className="flex flex-col gap-5">
 
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-1">Nome completo</label>
-                  <input type="text" name="nome" value={form.nome} onChange={handleChange} required placeholder="João Silva"
+                  <input
+                  type="text"
+                  name="nome"
+                  value={usuario.nome}
+                  onChange={atualizarEstado} required placeholder="Nome"
                     className="w-full border border-slate-200 bg-slate-50 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#539b37] transition text-slate-800" />
                 </div>
 
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-1">E-mail</label>
-                  <input type="email" name="email" value={form.email} onChange={handleChange} required placeholder="joao@email.com"
+                  <input
+                  type="email"
+                  name="usuario"
+                  value={usuario.usuario}
+                  onChange={atualizarEstado} required placeholder="exemplo@email.com"
                     className="w-full border border-slate-200 bg-slate-50 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#539b37] transition text-slate-800" />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-1">Telefone</label>
-                  <input type="tel" name="telefone" value={form.telefone} onChange={handleChange} required placeholder="(81) 99999-9999"
-                    className="w-full border border-slate-200 bg-slate-50 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#539b37] transition text-slate-800" />
+                  <label className="block text-sm font-semibold text-slate-700 mb-1">
+                    Foto
+                  </label>
+
+                  <input
+                    type="text"
+                    name="foto"
+                    value={usuario.foto}
+                    onChange={atualizarEstado}
+                    required
+                    placeholder="Link da foto"
+                    className="w-full border border-slate-200 bg-slate-50 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#539b37] transition text-slate-800"
+                  />
                 </div>
 
                 <div>
@@ -321,11 +398,11 @@ function Home() {
                     <input
                       type={verSenha ? "text" : "password"}
                       name="senha"
-                      value={form.senha}
-                      onChange={handleChange}
+                      value={usuario.senha}
+                      onChange={atualizarEstado}
                       required
-                      placeholder="Mínimo 6 caracteres"
-                      minLength={6}
+                      placeholder="Mínimo 8 caracteres"
+                      minLength={8}
                       className="w-full border border-slate-200 bg-slate-50 rounded-xl px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-[#539b37] transition text-slate-800"
                     />
                     <button type="button" onClick={() => setVerSenha(!verSenha)}
@@ -339,15 +416,14 @@ function Home() {
                   <label className="block text-sm font-semibold text-slate-700 mb-1">Confirmar senha</label>
                   <div className="relative">
                     <input
-                      type={verConfirmarSenha ? "text" : "password"}
-                      name="confirmarSenha"
-                      value={form.confirmarSenha}
-                      onChange={handleChange}
+                      type="password"
+                      value={confirmarSenha}
+                      onChange={handleConfirmarSenha}
                       required
                       placeholder="Repita a senha"
                       minLength={6}
                       className={`w-full border bg-slate-50 rounded-xl px-4 py-3 pr-12 focus:outline-none focus:ring-2 transition text-slate-800 ${
-                        form.confirmarSenha && form.senha !== form.confirmarSenha
+                        confirmarSenha && usuario.senha !== confirmarSenha
                           ? "border-red-400 focus:ring-red-400"
                           : "border-slate-200 focus:ring-[#539b37]"
                       }`}
@@ -357,17 +433,17 @@ function Home() {
                       {verConfirmarSenha ? <EyeSlashIcon size={20} /> : <EyeIcon size={20} />}
                     </button>
                   </div>
-                  {form.confirmarSenha && form.senha !== form.confirmarSenha && (
+                  {confirmarSenha && usuario.senha !== confirmarSenha && (
                     <p className="text-red-500 text-xs mt-1">As senhas não coincidem</p>
                   )}
-                  {form.confirmarSenha && form.senha === form.confirmarSenha && (
+                  {confirmarSenha && usuario.senha === confirmarSenha && (
                     <p className="text-green-500 text-xs mt-1">Senhas coincidem</p>
                   )}
                 </div>
 
                 <button
                   type="submit"
-                  disabled={form.senha !== form.confirmarSenha}
+                  disabled={usuario.senha !== confirmarSenha}
                   className="mt-2 w-full py-4 bg-[#539b37] text-white font-bold rounded-xl hover:brightness-110 transition-all duration-300 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Criar minha conta

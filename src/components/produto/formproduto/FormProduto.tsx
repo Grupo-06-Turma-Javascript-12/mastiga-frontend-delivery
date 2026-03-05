@@ -2,7 +2,7 @@ import { useContext, useEffect, useState, type ChangeEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import { AuthContext } from "../../../contexts/AuthContext";
-import type { Categoria } from "../../../models/Categoria";
+import type Categoria from "../../../models/Categoria";
 import type { Produto } from "../../../models/Produto";
 import { atualizar, buscar, cadastrar } from "../../../services/Service";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
@@ -15,7 +15,15 @@ function FormProduto() {
   const [categorias, setCategorias] = useState<Categoria[]>([]);
 
   const [categoria, setCategoria] = useState<Categoria>({ id: 0, descricao: '', });
-  const [produto, setProduto] = useState<Produto>({} as Produto);
+  const [produto, setProduto] = useState<Produto>({
+  id: 0,
+  nome: "",
+  preco: 0,
+  tempo_preparo: 0,
+  tipo: "",
+  categoria: null,
+  usuario: null
+  })
 
   const { id } = useParams<{ id: string }>();
 
@@ -36,7 +44,7 @@ function FormProduto() {
 
   async function buscarCategoriaPorId(id: string) {
     try {
-      await buscar(`/categorias/${id}`, setCategoria, {
+      await buscar(`/categoria/${id}`, setCategoria, {
         headers: { Authorization: token }
       });
     } catch (error: any) {
@@ -48,7 +56,7 @@ function FormProduto() {
 
   async function buscarCategorias() {
     try {
-      await buscar('/categorias', setCategorias, {
+      await buscar('/categoria', setCategorias, {
         headers: { Authorization: token }
       });
     } catch (error: any) {
@@ -96,6 +104,12 @@ function FormProduto() {
   async function gerarNovoProduto(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
     setIsLoading(true);
+    console.log(produto)
+
+    const produtoParaEnviar = {
+    ...produto,
+    preco: parseFloat(String(produto.preco).replace(",", "."))
+  }
 
     if (id !== undefined) {
       try {
@@ -115,7 +129,7 @@ function FormProduto() {
       }
     } else {
       try {
-        await cadastrar(`/produtos`, produto, setProduto, {
+        await cadastrar(`/produtos`, produtoParaEnviar, setProduto, {
           headers: {
             Authorization: token,
           },
@@ -166,7 +180,19 @@ function FormProduto() {
             name="preco"
             required
             className="border-2 border-orange-700 rounded p-2"
-            value={produto.preco}
+            value={produto.preco === 0 ? "" : String(produto.preco)}
+            onChange={(e) => setProduto({...produto, preco: e.target.value as any})}
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="tipo">Tipo do Produto</label>
+          <input
+            type="text"
+            placeholder="Tipo"
+            name="tipo"
+            required
+            className="border-2 border-orange-700 rounded p-2"
+            value={produto.tipo}
             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
           />
         </div>

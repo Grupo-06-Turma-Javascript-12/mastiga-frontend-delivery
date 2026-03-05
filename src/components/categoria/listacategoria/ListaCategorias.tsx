@@ -1,7 +1,6 @@
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CardCategoria from "../cardcategoria/CardCategoria";
 import { SyncLoader } from "react-spinners";
-import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
 import type Categoria from "../../../models/Categoria";
 import { buscar } from "../../../services/Service";
@@ -13,7 +12,7 @@ function ListaCategoria() {
 
 const [isLoading, setIsLoading] = useState<boolean>(false)
 
-const [categoria, setTemas] = useState<Categoria[]>([])
+const [categoria, setCategoria] = useState<Categoria[]>([])
 
 const { usuario, handleLogout } = useContext(AuthContext)
 const token = usuario.token
@@ -26,15 +25,15 @@ useEffect(() => {
 }, [token])
 
 useEffect(() => {
-  buscarTemas()
+  buscarCategoria()
 }, [categoria.length])
 
-async function buscarTemas() {
+async function buscarCategoria() {
   try {
 
     setIsLoading(true)
 
-    await buscar('/categoria', setTemas, {
+    await buscar('/categoria', setCategoria, {
       headers: { Authorization: token }
     })
   } catch (error: any) {
@@ -58,7 +57,7 @@ return (
           <div className="container flex flex-col">
              {(!isLoading && categoria.length === 0) && (
           	<span className="text-3xl text-center my-8">
-         		Nenhum Categoria foi encontrado!
+         		Nenhuma Categoria foi encontrada!
            	</span>
              )}
              <div className="grid grid-cols-1 md:grid-cols-2

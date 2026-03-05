@@ -1,4 +1,5 @@
-import type { Categoria } from "./Categoria"
+
+import type Categoria from "./Categoria"
 import type { Usuario } from "./Usuario"
 
 export interface Produto {
