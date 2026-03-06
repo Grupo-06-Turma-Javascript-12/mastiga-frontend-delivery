@@ -1,90 +1,75 @@
-import { Link } from 'react-router-dom'
-import type { Produto } from '../../../models/Produto'
+import type { Produto } from "../../../models/Produto"
+import { getImagemProduto } from "../../../utils/getImagemProduto"
 
-interface CardProdutosProps {
-    produto: Produto
+interface CardProdutoProps {
+  produto: Produto
 }
 
-function CardProduto({ produto }: CardProdutosProps) {
-  return (
-    <div className="bg-white rounded-2xl shadow-md 
-                    hover:shadow-xl hover:-translate-y-1
-                    transition-all duration-300
-                    flex flex-col justify-between overflow-hidden">
+const emojiPorTipo: Record<string, string> = {
+  LANCHE: "🥗",
+  BEBIDA: "🥤",
+  PIZZA: "🍕",
+  SOBREMESA: "🍃",
+  SALADA: "🥗",
+  SOPA: "🍲",
+  MASSA: "🍝",
+  SOBREMESAS: "🍃",
+}
 
-      {/* Cabeçalho */}
-      <div className="bg-[#15803d] px-4 py-3 flex items-center gap-3">
+export default function CardProduto({ produto }: CardProdutoProps) {
+  const precoFormatado = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(produto.preco)
+
+  const emoji = emojiPorTipo[produto.tipo.toUpperCase()] ?? "🌿"
+
+  return (
+    <article className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden flex flex-col border border-gray-100">
+
+      {/* Imagem + Badge */}
+      <div className="relative h-44 overflow-hidden">
         <img
-          className="h-10 w-10 rounded-full border-2 border-[#166534] object-cover"
-          src={produto.usuario?.foto || 'https://cdn-icons-png.flaticon.com/512/3177/3177440.png'}
-          onError={(e) =>
-            (e.currentTarget.src =
-              'https://cdn-icons-png.flaticon.com/512/3177/3177440.png')
-          }
-          alt="Foto do usuário"
+          src={getImagemProduto(produto.tipo)}
+          alt={produto.nome}
+          className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+          loading="lazy"
         />
-        <h3 className="text-sm font-semibold text-white uppercase tracking-wide">
-          {produto.usuario?.nome}
-        </h3>
+        {produto.categoria && (
+          <span className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-green-700 text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm">
+            {emoji} {produto.categoria.descricao}
+          </span>
+        )}
       </div>
 
       {/* Conteúdo */}
-      <div className="p-5 flex flex-col gap-3">
-
-        <h4 className="text-lg font-bold text-gray-800 uppercase">
-          {produto.nome}
-        </h4>
-
-        {/* Preço em destaque */}
-        <p className="text-2xl font-bold text-[#f97316]">
-          R$ {Number(produto.preco).toFixed(2)}
-        </p>
-
-        <div className="text-sm text-gray-600 space-y-1">
-          <p>
-            <span className="font-medium text-[#15803d]">Categoria:</span>{" "}
-            {produto.categoria?.descricao}
+      <div className="p-4 flex flex-col flex-1 justify-between gap-3">
+        <div>
+          <h2 className="text-base font-semibold text-gray-800 leading-snug line-clamp-2">
+            {produto.nome}
+          </h2>
+          <p className="text-xs text-gray-400 mt-1.5 flex items-center gap-1">
+            ⏱ {produto.tempo_preparo} min de preparo
           </p>
-          <p>
-            <span className="font-medium text-[#15803d]">Tipo:</span>{" "}
-            {produto.tipo}
-          </p>
+          {produto.tipo && (
+            <p className="text-xs text-gray-400 mt-1">
+              🏷 {produto.tipo}
+            </p>
+          )}
         </div>
 
-      </div>
-
-      {/* Botões */}
-      <div className="flex">
-
-        <Link
-          to={`/editarproduto/${produto.id}`}
-          className="w-full"
-        >
+        <div className="flex items-center justify-between mt-1">
+          <span className="text-lg font-bold text-gray-900">
+            {precoFormatado}
+          </span>
           <button
-            className="w-full py-3 bg-[#f97316] 
-                      text-white font-semibold
-                      hover:bg-[#ea580c] transition"
+            type="button"
+            className="bg-green-600 hover:bg-green-700 text-white text-sm font-medium px-4 py-2 rounded-xl transition-colors focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2"
           >
-            Editar
+            + Adicionar
           </button>
-        </Link>
-
-        <Link
-          to={`/deletarproduto/${produto.id}`}
-          className="w-full"
-        >
-          <button
-            className="w-full py-3 bg-[#15803d] 
-                      text-white font-semibold
-                      hover:bg-[#166534] transition"
-          >
-            Deletar
-          </button>
-        </Link>
-
+        </div>
       </div>
-    </div>
+    </article>
   )
 }
-
-export default CardProduto
