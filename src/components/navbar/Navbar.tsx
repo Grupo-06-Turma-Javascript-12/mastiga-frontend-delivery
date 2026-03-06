@@ -1,21 +1,29 @@
-import { Link } from "react-router-dom"
-import { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import { useState, useContext } from "react"
 import { ShoppingCartIcon } from "@phosphor-icons/react"
+import { AuthContext } from "../../contexts/AuthContext"
 
 function Navbar() {
 
+  const { handleLogout } = useContext(AuthContext)
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  
+  const navigate = useNavigate()
+
   const linkClass = "px-4 py-2 rounded-full transition-all duration-200 font-semibold border-2"
   const linkStyle = { color: '#ffffff', borderColor: 'rgba(255,255,255,0.4)' }
-  const onEnter = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const onEnter = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
     e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.2)'
     e.currentTarget.style.borderColor = '#ffffff'
   }
-  const onLeave = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const onLeave = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
     e.currentTarget.style.backgroundColor = 'transparent'
     e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)'
+  }
+
+  function handleSair() {
+    handleLogout()
+    navigate('/home')
   }
 
   return (
@@ -48,7 +56,16 @@ function Navbar() {
           </div>
 
           <Link to='/sobrenos' className={linkClass} style={linkStyle} onMouseEnter={onEnter} onMouseLeave={onLeave}>Sobre Nós</Link>
-          <Link to='/sair' className={linkClass} style={linkStyle} onMouseEnter={onEnter} onMouseLeave={onLeave}>Sair</Link>
+          
+          <button
+            onClick={handleSair}
+            className={linkClass}
+            style={linkStyle}
+            onMouseEnter={onEnter}
+            onMouseLeave={onLeave}
+          >
+            Sair
+          </button>
 
           {/* Carrinho desktop */}
           <Link to='/carrinho' className={`relative ${linkClass}`} style={linkStyle} onMouseEnter={onEnter} onMouseLeave={onLeave}>
@@ -86,7 +103,13 @@ function Navbar() {
           </div>
 
           <Link to='/sobrenos' className="py-2 font-semibold border-b border-white/20 text-white/90 hover:text-white" onClick={() => setMenuOpen(false)}>Sobre Nós</Link>
-          <Link to='/sair' className="py-2 font-semibold border-b border-white/20 text-white/90 hover:text-white" onClick={() => setMenuOpen(false)}>Sair</Link>
+          
+          <button
+            onClick={() => { handleSair(); setMenuOpen(false) }}
+            className="py-2 font-semibold border-b border-white/20 text-white/90 hover:text-white text-left w-full"
+          >
+            Sair
+          </button>
 
           {/* Carrinho mobile */}
           <Link to='/carrinho' className="py-2 font-semibold text-white/90 hover:text-white flex items-center gap-2" onClick={() => setMenuOpen(false)}>
