@@ -1,9 +1,9 @@
-import { useState, useContext, useEffect, type ChangeEvent, type FormEvent } from "react";
+import { useContext, useEffect, useState, type ChangeEvent, type FormEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import { AuthContext } from "../../../contexts/AuthContext";
 import type Categoria from "../../../models/Categoria";
-import { buscar, atualizar, cadastrar } from "../../../services/Service";
+import { atualizar, buscar, cadastrar } from "../../../services/Service";
 
 function FormCategoria() {
 
@@ -50,7 +50,7 @@ function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
 }
 
 function retornar() {
-  navigate("/categoria")
+  navigate("/categorias")
 }
 
 async function gerarNovoCategoria(e: FormEvent<HTMLFormElement>) {
