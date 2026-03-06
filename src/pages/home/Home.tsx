@@ -6,7 +6,7 @@ import {
   X,
 } from "@phosphor-icons/react";
 import { useContext, useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import { AuthContext } from "../../contexts/AuthContext";
 import type { Usuario } from "../../models/Usuario";
@@ -50,6 +50,17 @@ function Home() {
   const [verSenhaLogin, setVerSenhaLogin] = useState(false);
   const carrosselRef = useRef<HTMLDivElement>(null);
   const autoScrollRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+   const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.querySelector(location.hash);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -224,7 +235,7 @@ function Home() {
                   type="button"
                   onClick={() => {
                     setModalAberto(false);
-                    navigate("/cadastro");
+                    navigate("/home#cadastro");
                   }}
                   className="text-[#e0992e] font-semibold hover:underline"
                 >
@@ -354,7 +365,7 @@ function Home() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={cadastrarNovoUsuario} className="flex flex-col gap-5">
+              <form id="cadastro" onSubmit={cadastrarNovoUsuario} className="flex flex-col gap-5">
 
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-1">Nome completo</label>
@@ -416,7 +427,7 @@ function Home() {
                   <label className="block text-sm font-semibold text-slate-700 mb-1">Confirmar senha</label>
                   <div className="relative">
                     <input
-                      type="password"
+                      type={verConfirmarSenha ? "text" : "password"}
                       value={confirmarSenha}
                       onChange={handleConfirmarSenha}
                       required
