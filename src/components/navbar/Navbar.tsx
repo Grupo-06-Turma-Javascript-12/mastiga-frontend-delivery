@@ -2,10 +2,13 @@ import { Link, useNavigate } from "react-router-dom"
 import { useState, useContext } from "react"
 import { ShoppingCartIcon } from "@phosphor-icons/react"
 import { AuthContext } from "../../contexts/AuthContext"
+import { useCarrinho } from "../../contexts/CarrinhoContext"
+
 
 function Navbar() {
 
   const { handleLogout } = useContext(AuthContext)
+  const { abrirCarrinho, totalItens } = useCarrinho()
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const navigate = useNavigate()
@@ -68,10 +71,11 @@ function Navbar() {
           </button>
 
           {/* Carrinho desktop */}
-          <Link to='/carrinho' className={`relative ${linkClass}`} style={linkStyle} onMouseEnter={onEnter} onMouseLeave={onLeave}>
-            <ShoppingCartIcon size={20} weight="fill" />
-            <span className="absolute -top-1 -right-1 bg-white text-green-700 text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
-          </Link>
+          {/* Carrinho desktop */}
+          <button onClick={abrirCarrinho} className={`relative ${linkClass}`} style={linkStyle} onMouseEnter={onEnter} onMouseLeave={onLeave}>
+              <ShoppingCartIcon size={20} weight="fill" />
+              <span className="absolute -top-1 -right-1 bg-white text-green-700 text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">{totalItens}</span>
+          </button>
         </div>
 
         <button className="lg:hidden flex flex-col gap-1.5 p-2" onClick={() => setMenuOpen(!menuOpen)}>
@@ -112,11 +116,11 @@ function Navbar() {
           </button>
 
           {/* Carrinho mobile */}
-          <Link to='/carrinho' className="py-2 font-semibold text-white/90 hover:text-white flex items-center gap-2" onClick={() => setMenuOpen(false)}>
+          <button onClick={() => { abrirCarrinho(); setMenuOpen(false) }} className="py-2 font-semibold text-white/90 hover:text-white flex items-center gap-2">
             <ShoppingCartIcon size={20} weight="fill" />
-            Carrinho
-            <span className="bg-white text-green-700 text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
-          </Link>
+             Carrinho
+           <span className="bg-white text-green-700 text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">{totalItens}</span>
+          </button>
         </div>
       )}
     </nav>
