@@ -1,5 +1,6 @@
 import type { Produto } from "../../../models/Produto"
 import { getImagemProduto } from "../../../utils/getImagemProduto"
+import { useCarrinho } from "../../../contexts/CarrinhoContext"
 
 interface CardProdutoProps {
   produto: Produto
@@ -17,6 +18,8 @@ const emojiPorTipo: Record<string, string> = {
 }
 
 export default function CardProduto({ produto }: CardProdutoProps) {
+  const { adicionarItem } = useCarrinho()
+
   const precoFormatado = new Intl.NumberFormat("pt-BR", {
     style: "currency",
     currency: "BRL",
@@ -64,6 +67,7 @@ export default function CardProduto({ produto }: CardProdutoProps) {
           </span>
           <button
             type="button"
+            onClick={() => adicionarItem(produto)}
             className="bg-green-600 hover:bg-green-700 text-white text-sm font-medium px-4 py-2 rounded-xl transition-colors focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2"
           >
             + Adicionar

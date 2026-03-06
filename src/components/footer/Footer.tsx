@@ -5,6 +5,7 @@ function Footer() {
 
   const data = new Date().getFullYear()
 
+
   return (
     <footer className="text-white" style={{ background: 'linear-gradient(to right, #15803d, #e0992e)' }}>
       
@@ -38,7 +39,6 @@ function Footer() {
           <Link to="/home" className="text-white/80 hover:text-white transition-colors duration-200">Home</Link>
           <Link to="/categorias" className="text-white/80 hover:text-white transition-colors duration-200">Categorias</Link>
           <Link to="/sobrenos" className="text-white/80 hover:text-white transition-colors duration-200">Sobre Nós</Link>
-          <Link to="/carrinho" className="text-white/80 hover:text-white transition-colors duration-200">Carrinho</Link>
         </div>
 
         <div className="flex flex-col gap-3">
