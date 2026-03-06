@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { ClipLoader } from "react-spinners"
 import { AuthContext } from "../../../contexts/AuthContext"
@@ -68,7 +68,7 @@ async function deletarCategoria() {
 }
 
 function retornar() {
-  navigate("/categoria")
+  navigate("/categorias")
 }
 
   return (

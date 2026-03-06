@@ -1,6 +1,6 @@
-import { Link, useNavigate } from "react-router-dom"
-import { useState, useContext } from "react"
 import { ShoppingCartIcon } from "@phosphor-icons/react"
+import { useContext, useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import { AuthContext } from "../../contexts/AuthContext"
 import { useCarrinho } from "../../contexts/CarrinhoContext"
 
@@ -48,12 +48,12 @@ function Navbar() {
             </Link>
             {dropdownOpen && (
               <div className="absolute top-full left-0 mt-2 bg-[#f8f7f5] rounded-xl shadow-xl p-2 min-w-40 z-50">
-                <Link to='/categorias/bebidas' className="block px-4 py-2 rounded-lg text-green-800 hover:bg-slate-200 transition-all">Bebidas</Link>
-                <Link to='/categorias/massas' className="block px-4 py-2 rounded-lg text-green-800 hover:bg-slate-200 transition-all">Massas</Link>
-                <Link to='/categorias/pizzasintegrais' className="block px-4 py-2 rounded-lg text-green-800 hover:bg-slate-200 transition-all">Pizzas Integrais</Link>
-                <Link to='/categorias/saladas' className="block px-4 py-2 rounded-lg text-green-800 hover:bg-slate-200 transition-all">Saladas</Link>
-                <Link to='/categorias/sopas' className="block px-4 py-2 rounded-lg text-green-800 hover:bg-slate-200 transition-all">Sopas</Link>
-                <Link to='/categorias/sobremesas' className="block px-4 py-2 rounded-lg text-green-800 hover:bg-slate-200 transition-all">Sobremesas</Link>
+                <Link to='/categorias#bebidas' className="block px-4 py-2 rounded-lg text-green-800 hover:bg-slate-200 transition-all">Bebidas</Link>
+                <Link to='/categorias#massas' className="block px-4 py-2 rounded-lg text-green-800 hover:bg-slate-200 transition-all">Massas</Link>
+                <Link to='/categorias#pizzas-integrais' className="block px-4 py-2 rounded-lg text-green-800 hover:bg-slate-200 transition-all">Pizzas Integrais</Link>
+                <Link to='/categorias#saladas' className="block px-4 py-2 rounded-lg text-green-800 hover:bg-slate-200 transition-all">Saladas</Link>
+                <Link to='/categorias#sopas' className="block px-4 py-2 rounded-lg text-green-800 hover:bg-slate-200 transition-all">Sopas</Link>
+                <Link to='/categorias#sobremesas' className="block px-4 py-2 rounded-lg text-green-800 hover:bg-slate-200 transition-all">Sobremesas</Link>
               </div>
             )}
           </div>
@@ -96,12 +96,12 @@ function Navbar() {
             </button>
             {dropdownOpen && (
               <div className="flex flex-col pl-4 mt-1 gap-1">
-                <Link to='/categorias/bebidas' className="py-1.5 text-white/80 hover:text-white" onClick={() => setMenuOpen(false)}>Bebidas</Link>
-                <Link to='/categorias/massas' className="py-1.5 text-white/80 hover:text-white" onClick={() => setMenuOpen(false)}>Massas</Link>
-                <Link to='/categorias/pizzasintegrais' className="py-1.5 text-white/80 hover:text-white" onClick={() => setMenuOpen(false)}>Pizzas Integrais</Link>
-                <Link to='/categorias/saladas' className="py-1.5 text-white/80 hover:text-white" onClick={() => setMenuOpen(false)}>Saladas</Link>
-                <Link to='/categorias/sopas' className="py-1.5 text-white/80 hover:text-white" onClick={() => setMenuOpen(false)}>Sopas</Link>
-                <Link to='/categorias/sobremesas' className="py-1.5 text-white/80 hover:text-white" onClick={() => setMenuOpen(false)}>Sobremesas</Link>
+                <Link to='/categorias#bebidass' className="py-1.5 text-white/80 hover:text-white" onClick={() => setMenuOpen(false)}>Bebidas</Link>
+                <Link to='/categorias#massas' className="py-1.5 text-white/80 hover:text-white" onClick={() => setMenuOpen(false)}>Massas</Link>
+                <Link to='/categorias#pizzas-integrais' className="py-1.5 text-white/80 hover:text-white" onClick={() => setMenuOpen(false)}>Pizzas Integrais</Link>
+                <Link to='/categorias#saladas' className="py-1.5 text-white/80 hover:text-white" onClick={() => setMenuOpen(false)}>Saladas</Link>
+                <Link to='/categorias#sopas' className="py-1.5 text-white/80 hover:text-white" onClick={() => setMenuOpen(false)}>Sopas</Link>
+                <Link to='/categorias#sobremesas' className="py-1.5 text-white/80 hover:text-white" onClick={() => setMenuOpen(false)}>Sobremesas</Link>
               </div>
             )}
           </div>

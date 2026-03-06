@@ -198,6 +198,20 @@ function FormProduto() {
         </div>
 
         <div className="flex flex-col gap-2">
+          <label htmlFor="tempo_preparo">Tempo de Preparo (minutos)</label>
+          <input
+            type="number"
+            placeholder="Tempo de preparo em minutos"
+            name="tempo_preparo"
+            required
+            min={0}
+            className="border-2 border-orange-700 rounded p-2"
+            value={produto.tempo_preparo === 0 ? "" : produto.tempo_preparo}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setProduto({...produto, tempo_preparo: parseInt(e.target.value) || 0})}
+          />
+        </div>
+
+        <div className="flex flex-col gap-2">
           <p>Categoria do Produto</p>
           <select name="categoria" id="categoria" className="border p-2 border-orange-700 rounded"
             onChange={(e) => buscarCategoriaPorId(e.currentTarget.value)}>
