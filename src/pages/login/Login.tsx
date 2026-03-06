@@ -112,7 +112,7 @@ function Login() {
             Não tem conta?{" "}
             <button
               type="button"
-              onClick={() => navigate("/cadastro")}
+              onClick={() => navigate("/home#cadastro")}
               className="text-[#e0992e] font-semibold hover:underline"
             >
               Criar conta
