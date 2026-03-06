@@ -1,7 +1,7 @@
-import type { ProdutoPublico } from "../../../models/ProdutoPublico"
+import type { Produto } from "../../../models/Produto"
 
 interface ItemCarrinho {
-  produto: ProdutoPublico
+  produto: Produto
   quantidade: number
 }
 
@@ -10,7 +10,7 @@ interface CarrinhoProps {
   aberto: boolean
   onFechar: () => void
   onRemover: (id: number) => void
-  onAumentar: (produto: ProdutoPublico) => void
+  onAumentar: (produto: Produto) => void
   onDiminuir: (id: number) => void
 }
 
