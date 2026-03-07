@@ -78,8 +78,8 @@ function App() {
           </div>
           <Footer />
         </BrowserRouter>
-      </AuthProvider>
-    </>
+      </CarrinhoProvider>
+    </AuthProvider>
   );
 }
 
