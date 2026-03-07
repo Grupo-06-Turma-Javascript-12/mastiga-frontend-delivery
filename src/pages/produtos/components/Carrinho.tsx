@@ -1,3 +1,4 @@
+import { useState } from "react"
 import type { Produto } from "../../../models/Produto"
 
 interface ItemCarrinho {
@@ -14,6 +15,8 @@ interface CarrinhoProps {
   onDiminuir: (id: number) => void
 }
 
+const descontos = [10, 20, 30]
+
 export default function Carrinho({
   itens,
   aberto,
@@ -22,27 +25,34 @@ export default function Carrinho({
   onAumentar,
   onDiminuir,
 }: CarrinhoProps) {
-  const total = itens.reduce(
+  const [descontoSelecionado, setDescontoSelecionado] = useState<number | null>(null)
+
+  const subtotal = itens.reduce(
     (acc, item) => acc + item.produto.preco * item.quantidade,
     0
   )
 
+  const valorDesconto = descontoSelecionado ? subtotal * (descontoSelecionado / 100) : 0
+  const total = subtotal - valorDesconto
+
+  function toggleDesconto(percentual: number) {
+    setDescontoSelecionado(prev => prev === percentual ? null : percentual)
+  }
+
   return (
     <>
-        {aberto && (
-            <div
-            className="fixed inset-0 bg-black/40 z-40 transition-opacity"
-            onClick={onFechar}
+      {aberto && (
+        <div
+          className="fixed inset-0 bg-black/40 z-40 transition-opacity"
+          onClick={onFechar}
         />
-        )}
+      )}
 
-      
       <aside
         className={`fixed top-0 right-0 h-full w-80 bg-white shadow-2xl z-50 flex flex-col transform transition-transform duration-300 ${
           aberto ? "translate-x-0" : "translate-x-full"
         }`}
       >
-      
         <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
           <h2 className="text-lg font-bold text-gray-800">
             🛒 Meu Carrinho
@@ -78,7 +88,6 @@ export default function Carrinho({
                   </p>
                 </div>
 
-              
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => onDiminuir(item.produto.id)}
@@ -97,7 +106,6 @@ export default function Carrinho({
                   </button>
                 </div>
 
-               
                 <div className="text-right min-w-15">
                   <p className="text-sm font-bold text-gray-800">
                     R$ {(item.produto.preco * item.quantidade).toFixed(2)}
@@ -114,13 +122,49 @@ export default function Carrinho({
           )}
         </div>
 
-      
         {itens.length > 0 && (
           <div className="px-5 py-4 border-t border-gray-100 space-y-3">
-            <div className="flex justify-between text-base font-bold text-gray-800">
-              <span>Total</span>
-              <span>R$ {total.toFixed(2)}</span>
+
+            {/* Discount buttons */}
+            <div>
+              <p className="text-xs font-semibold text-slate-500 mb-2 uppercase tracking-wide">
+                Cupom de desconto
+              </p>
+              <div className="flex gap-2">
+                {descontos.map((percentual) => (
+                  <button
+                    key={percentual}
+                    onClick={() => toggleDesconto(percentual)}
+                    className={`flex-1 py-1.5 rounded-xl text-sm font-bold border transition-all duration-200 ${
+                      descontoSelecionado === percentual
+                        ? "bg-[#539b37] text-white border-[#539b37]"
+                        : "bg-white text-[#539b37] border-[#539b37] hover:bg-green-50"
+                    }`}
+                  >
+                    {percentual}%
+                  </button>
+                ))}
+              </div>
             </div>
+
+            {/* Totals */}
+            <div className="space-y-1">
+              <div className="flex justify-between text-sm text-gray-500">
+                <span>Subtotal</span>
+                <span>R$ {subtotal.toFixed(2)}</span>
+              </div>
+              {descontoSelecionado && (
+                <div className="flex justify-between text-sm text-rose-500">
+                  <span>Desconto ({descontoSelecionado}%)</span>
+                  <span>− R$ {valorDesconto.toFixed(2)}</span>
+                </div>
+              )}
+              <div className="flex justify-between text-base font-bold text-gray-800 pt-1 border-t border-gray-100">
+                <span>Total</span>
+                <span>R$ {total.toFixed(2)}</span>
+              </div>
+            </div>
+
             <button className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold transition-colors">
               Finalizar Pedido
             </button>

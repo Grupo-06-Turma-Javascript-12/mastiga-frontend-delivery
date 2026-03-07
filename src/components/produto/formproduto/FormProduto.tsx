@@ -152,94 +152,104 @@ function FormProduto() {
   const carregandoCategoria = categoria.descricao === '';
 
   return (
-    <div className="container flex flex-col mx-auto items-center">
-      <h1 className="text-4xl text-center my-8">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 py-10 px-4">
+      <h1 className="text-4xl font-bold text-[#539b37] mb-2 text-center">
         {id !== undefined ? 'Editar Produto' : 'Cadastrar Produto'}
-        </h1>
+      </h1>
 
-      <form className="flex flex-col w-1/2 gap-4"
-        onSubmit={gerarNovoProduto}>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="titulo">Nome do Produto</label>
-          <input
-            type="text"
-            placeholder="Nome"
-            name="nome"
-            required
-            className="border-2 border-orange-700 rounded p-2"
-            value={produto.nome}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-          />
-        </div>
+      <div className="w-full max-w-xl bg-white rounded-2xl shadow-xl border border-slate-200 p-10 mt-6">
+        <form className="flex flex-col gap-5" onSubmit={gerarNovoProduto}>
 
-        <div className="flex flex-col gap-2">
-          <label htmlFor="titulo">Preço do Produto</label>
-          <input
-            type="text"
-            placeholder="Preço"
-            name="preco"
-            required
-            className="border-2 border-orange-700 rounded p-2"
-            value={produto.preco === 0 ? "" : String(produto.preco)}
-            onChange={(e) => setProduto({...produto, preco: e.target.value as any})}
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="tipo">Tipo do Produto</label>
-          <input
-            type="text"
-            placeholder="Tipo"
-            name="tipo"
-            required
-            className="border-2 border-orange-700 rounded p-2"
-            value={produto.tipo}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-          />
-        </div>
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-semibold text-slate-700">Nome do Produto</label>
+            <input
+              type="text"
+              placeholder="Nome"
+              name="nome"
+              required
+              className="border border-slate-200 bg-slate-50 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#539b37] transition text-slate-800"
+              value={produto.nome}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+            />
+          </div>
 
-        <div className="flex flex-col gap-2">
-          <label htmlFor="tempo_preparo">Tempo de Preparo (minutos)</label>
-          <input
-            type="number"
-            placeholder="Tempo de preparo em minutos"
-            name="tempo_preparo"
-            required
-            min={0}
-            className="border-2 border-orange-700 rounded p-2"
-            value={produto.tempo_preparo === 0 ? "" : produto.tempo_preparo}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => setProduto({...produto, tempo_preparo: parseInt(e.target.value) || 0})}
-          />
-        </div>
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-semibold text-slate-700">Preço do Produto</label>
+            <input
+              type="text"
+              placeholder="Preço"
+              name="preco"
+              required
+              className="border border-slate-200 bg-slate-50 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#539b37] transition text-slate-800"
+              value={produto.preco === 0 ? "" : String(produto.preco)}
+              onChange={(e) => setProduto({...produto, preco: e.target.value as any})}
+            />
+          </div>
 
-        <div className="flex flex-col gap-2">
-          <p>Categoria do Produto</p>
-          <select name="categoria" id="categoria" className="border p-2 border-orange-700 rounded"
-            onChange={(e) => buscarCategoriaPorId(e.currentTarget.value)}>
-            <option value="" selected disabled>Selecione uma Categoria</option>
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-semibold text-slate-700">Foto do Produto (URL)</label>
+            <input
+              type="text"
+              placeholder="Link da imagem"
+              name="tipo"
+              required
+              className="border border-slate-200 bg-slate-50 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#539b37] transition text-slate-800"
+              value={produto.tipo}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+            />
+          </div>
 
-            {categorias.map((categoria) => (
-            <>
-              <option value={categoria.id} >{categoria.descricao}</option>
-            </>
-            ))}
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-semibold text-slate-700">Tempo de Preparo (minutos)</label>
+            <input
+              type="number"
+              placeholder="Tempo de preparo em minutos"
+              name="tempo_preparo"
+              required
+              min={0}
+              className="border border-slate-200 bg-slate-50 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#539b37] transition text-slate-800"
+              value={produto.tempo_preparo === 0 ? "" : produto.tempo_preparo}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => setProduto({...produto, tempo_preparo: parseInt(e.target.value) || 0})}
+            />
+          </div>
 
-          </select>
-        </div>
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-semibold text-slate-700">Categoria do Produto</label>
+            <select
+              name="categoria"
+              id="categoria"
+              defaultValue=""
+              className="border border-slate-200 bg-slate-50 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#539b37] transition text-slate-800"
+              onChange={(e) => buscarCategoriaPorId(e.currentTarget.value)}
+            >
+              <option value="" disabled>Selecione uma Categoria</option>
+              {categorias.map((categoria) => (
+                <option key={categoria.id} value={categoria.id}>{categoria.descricao}</option>
+              ))}
+            </select>
+          </div>
 
-        <button
-          type='submit'
-          className='rounded disabled:bg-slate-200 bg-green-600 hover:bg-green-800 text-white font-bold w-1/2 mx-auto py-2 flex justify-center'
-          disabled={carregandoCategoria}
-        >
-          { isLoading ?
-              <ClipLoader
-                  color="#ffffff"
-                  size={24}
-              /> :
+          <button
+            type="submit"
+            disabled={carregandoCategoria}
+            className="mt-2 w-full py-4 bg-[#539b37] text-white font-bold rounded-xl hover:brightness-110 transition-all duration-300 text-lg flex justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isLoading ? (
+              <ClipLoader color="#ffffff" size={24} />
+            ) : (
               <span>{id === undefined ? 'Cadastrar' : 'Atualizar'}</span>
-          }
-        </button>
-      </form>
+            )}
+          </button>
+          <button
+            type="button"
+            onClick={retornar}
+            className="w-full py-3 rounded-xl font-semibold text-slate-600 border border-slate-200 hover:bg-slate-100 transition-all duration-300"
+          >
+            Cancelar
+          </button>
+
+        </form>
+      </div>
     </div>
   );
 }

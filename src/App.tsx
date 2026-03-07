@@ -7,8 +7,10 @@ import ListaCategoria from "./components/categoria/listacategoria/ListaCategoria
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/navbar/Navbar";
 import DeletarProduto from "./components/produto/deletarproduto/DeletarProduto";
+import DescontoProduto from "./components/produto/descontoproduto/DescontoProduto";
 import FormProduto from "./components/produto/formproduto/FormProduto";
 import ListaProdutos from "./components/produto/listaprodutos/ListaProdutos";
+import ScrollToTop from "./components/scrolltotop/ScrollToTop";
 import { AuthProvider } from "./contexts/AuthContext";
 import { CarrinhoProvider, useCarrinho } from "./contexts/CarrinhoContext";
 import Home from "./pages/home/Home";
@@ -22,6 +24,7 @@ function AppContent() {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Navbar />
       <Carrinho
         itens={itens}
@@ -40,12 +43,13 @@ function AppContent() {
           <Route path="/sobrenos" element={<SobreNos />} />
           <Route path="/produtos" element={<ListaProdutos />} />
           <Route path="/cadastrarproduto" element={<FormProduto />} />
-          <Route path="/editarproduto" element={<FormProduto />} />
-          <Route path="/deletarproduto" element={<DeletarProduto />} />
+          <Route path="/editarproduto/:id" element={<FormProduto />} />
+          <Route path="/deletarproduto/:id" element={<DeletarProduto />} />
           <Route path="/categorias" element={<ListaCategoria />} />
           <Route path="/cadastrarcategoria" element={<FormCategoria />} />
-          <Route path="/editarcategoria" element={<FormCategoria />} />
-          <Route path="/deletarcategoria" element={<DeletarCategoria />} />
+          <Route path="/editarcategoria/:id" element={<FormCategoria />} />
+          <Route path="/deletarcategoria/:id" element={<DeletarCategoria />} />
+          <Route path="/descontoproduto/:id" element={<DescontoProduto />} />
         </Routes>
       </div>
       <Footer />
