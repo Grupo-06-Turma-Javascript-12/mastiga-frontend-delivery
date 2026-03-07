@@ -4,6 +4,7 @@ import { SyncLoader } from "react-spinners";
 import { AuthContext } from "../../../contexts/AuthContext";
 import type Categoria from "../../../models/Categoria";
 import { buscar } from "../../../services/Service";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 import CardCategoria from "../cardcategoria/CardCategoria";
 
 function ListaCategoria() {
@@ -31,7 +32,7 @@ function ListaCategoria() {
 
 useEffect(() => {
   if (token === '') {
-    alert('Você precisa estar logado!')
+    ToastAlerta('Você precisa estar logado!')
     navigate('/')
   }
 }, [token])
@@ -59,10 +60,13 @@ async function buscarCategoria() {
 return (
   <>
     {isLoading && (
-      <div className="flex justify-center my-12">
-        <SyncLoader color="#312e81" size={32} />
-      </div>
-    )}
+          <div className="flex justify-center w-full my-12">
+            <SyncLoader
+              color="#15803d"
+              size={18}
+            />
+          </div>
+        )}
     <div className="flex justify-center w-full my-8 px-6">
       <div className="container flex flex-col">
         {(!isLoading && categoria.length === 0) && (

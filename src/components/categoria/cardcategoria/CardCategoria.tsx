@@ -10,7 +10,7 @@ export default function CardCategoria({ Categoria }: CardCategoriaProps) {
   return (
     <section id={Categoria.descricao.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "-")} 
       className="w-full mb-12">
-      {/* Banner da Categoria */}
+      
       <div className="relative w-full h-48 overflow-hidden rounded-2xl mb-6">
         <img
           src={getImagemCategoria(Categoria.descricao)}
@@ -46,7 +46,7 @@ export default function CardCategoria({ Categoria }: CardCategoriaProps) {
         </div>
       </div>
 
-      {/* Produtos da Categoria */}
+      
       {Categoria.produto && Categoria.produto.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-2">
         {Categoria.produto.map((produto) => (
@@ -54,7 +54,7 @@ export default function CardCategoria({ Categoria }: CardCategoriaProps) {
             key={produto.id}
             className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100 overflow-hidden flex flex-col"
           >
-            {/* Imagem do produto via campo tipo */}
+            
             <div className="h-40 overflow-hidden">
               <img
                 src={produto.tipo}

@@ -283,7 +283,7 @@ function Home() {
               onClick={() => usuarioLogado.token !== '' ? navigate('/produtos') : setModalAberto(true)}
               className="px-8 py-4 bg-[#e0992e] text-white font-semibold rounded-lg hover:brightness-110 transition-all duration-300 text-lg"
             >
-              Hora de mastigar! - Cardápio Online
+              Faça seu Login e conheça o Cardápio Online
             </button>
           </div>
 

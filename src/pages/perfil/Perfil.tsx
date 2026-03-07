@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../../contexts/AuthContext"
 import { Leaf, EnvelopeSimpleIcon, UserIcon } from "@phosphor-icons/react"
+import { ToastAlerta } from "../../utils/ToastAlerta"
 
 function Perfil() {
   const navigate = useNavigate()
@@ -9,7 +10,7 @@ function Perfil() {
 
   useEffect(() => {
     if (usuario.token === "") {
-      alert("Você precisa estar logado")
+      ToastAlerta("Você precisa estar logado", "info")
       navigate("/")
     }
   }, [usuario.token])
@@ -92,7 +93,7 @@ function Perfil() {
                 Início
               </button>
               <button
-                onClick={() => navigate("/conhecercardapio")}
+                onClick={() => navigate("/produtos")}
                 className="flex-1 py-3 bg-[#e0992e] text-white font-bold rounded-xl hover:brightness-110 transition-all duration-300"
               >
                 Ver Cardápio

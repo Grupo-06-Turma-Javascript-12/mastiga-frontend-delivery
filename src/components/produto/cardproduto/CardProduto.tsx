@@ -15,7 +15,7 @@ export default function CardProduto({ produto }: CardProdutoProps) {
 
   return (
     <article className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden flex flex-col border border-gray-100">
-      {/* Imagem + Badge */}
+      
       <div className="relative h-44 overflow-hidden">
         <img
           src={produto.tipo}
@@ -29,7 +29,7 @@ export default function CardProduto({ produto }: CardProdutoProps) {
           </span>
         )}
       </div>
-      {/* Conteúdo */}
+     
       <div className="p-4 flex flex-col flex-1 justify-between gap-3">
         <div>
           <h2 className="text-base font-semibold text-gray-800 leading-snug line-clamp-2">

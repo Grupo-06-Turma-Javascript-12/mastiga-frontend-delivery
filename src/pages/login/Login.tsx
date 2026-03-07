@@ -1,4 +1,4 @@
-import { EyeIcon, EyeSlashIcon, Leaf } from "@phosphor-icons/react"
+import { EyeIcon, EyeSlashIcon, LeafIcon } from "@phosphor-icons/react"
 import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { ClipLoader } from "react-spinners"
@@ -41,7 +41,7 @@ function Login() {
 
         <div className="text-center mb-8">
           <div className="flex justify-center mb-3">
-            <Leaf size={52} weight="fill" className="text-[#539b37]" />
+            <LeafIcon size={52} weight="fill" className="text-[#539b37]" />
           </div>
           <h2 className="text-3xl font-bold text-slate-800 mb-1">
             Bem-vindo de volta!
