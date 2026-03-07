@@ -1,7 +1,7 @@
-import type { ProdutoPublico } from "../../../models/ProdutoPublico"
+import type { Produto } from "../../../models/Produto"
 
 interface ItemCarrinho {
-  produto: ProdutoPublico
+  produto: Produto
   quantidade: number
 }
 
@@ -10,7 +10,7 @@ interface CarrinhoProps {
   aberto: boolean
   onFechar: () => void
   onRemover: (id: number) => void
-  onAumentar: (produto: ProdutoPublico) => void
+  onAumentar: (produto: Produto) => void
   onDiminuir: (id: number) => void
 }
 
@@ -29,8 +29,6 @@ export default function Carrinho({
 
   return (
     <>
-      {/* Overlay escuro */}
-  {/* Overlay escuro */}
         {aberto && (
             <div
             className="fixed inset-0 bg-black/40 z-40 transition-opacity"
@@ -38,13 +36,13 @@ export default function Carrinho({
         />
         )}
 
-      {/* Drawer lateral */}
+      
       <aside
         className={`fixed top-0 right-0 h-full w-80 bg-white shadow-2xl z-50 flex flex-col transform transition-transform duration-300 ${
           aberto ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        {/* Header */}
+      
         <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
           <h2 className="text-lg font-bold text-gray-800">
             🛒 Meu Carrinho
@@ -58,7 +56,6 @@ export default function Carrinho({
           </button>
         </div>
 
-        {/* Itens */}
         <div className="flex-1 overflow-y-auto px-5 py-4 space-y-4">
           {itens.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full text-center text-gray-400 gap-2">
@@ -81,7 +78,7 @@ export default function Carrinho({
                   </p>
                 </div>
 
-                {/* Controles de quantidade */}
+              
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => onDiminuir(item.produto.id)}
@@ -100,8 +97,8 @@ export default function Carrinho({
                   </button>
                 </div>
 
-                {/* Subtotal + remover */}
-                <div className="text-right min-w-[60px]">
+               
+                <div className="text-right min-w-15">
                   <p className="text-sm font-bold text-gray-800">
                     R$ {(item.produto.preco * item.quantidade).toFixed(2)}
                   </p>
@@ -117,7 +114,7 @@ export default function Carrinho({
           )}
         </div>
 
-        {/* Footer com total */}
+      
         {itens.length > 0 && (
           <div className="px-5 py-4 border-t border-gray-100 space-y-3">
             <div className="flex justify-between text-base font-bold text-gray-800">

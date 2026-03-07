@@ -1,25 +1,38 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { SyncLoader } from "react-spinners";
 import { AuthContext } from "../../../contexts/AuthContext";
 import type Categoria from "../../../models/Categoria";
 import { buscar } from "../../../services/Service";
 import CardCategoria from "../cardcategoria/CardCategoria";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 function ListaCategoria() {
 
-     const navigate = useNavigate();
+  const navigate = useNavigate();
 
-const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
-const [categoria, setCategoria] = useState<Categoria[]>([])
+  const [categoria, setCategoria] = useState<Categoria[]>([])
 
-const { usuario, handleLogout } = useContext(AuthContext)
-const token = usuario.token
+  const { usuario, handleLogout } = useContext(AuthContext)
+  const token = usuario.token
+
+  const location = useLocation()
+
+  useEffect(() => {
+    if (!isLoading && categoria.length > 0 && location.hash) {
+      const id = location.hash.replace('#', '')
+      const el = document.getElementById(id)
+      if (el) {
+        setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 100)
+      }
+    }
+  }, [isLoading, categoria.length, location.hash])
 
 useEffect(() => {
   if (token === '') {
-    alert('Você precisa estar logado!')
+    ToastAlerta('Você precisa estar logado!')
     navigate('/')
   }
 }, [token])
@@ -45,35 +58,29 @@ async function buscarCategoria() {
   }
 }
 return (
-     <>
-
-      {isLoading && (
-    <SyncLoader
-        color="#312e81"
-    	size={32}
-	/>
-)}  
-       <div className="flex justify-center w-full my-4">
-          <div className="container flex flex-col">
-             {(!isLoading && categoria.length === 0) && (
-          	<span className="text-3xl text-center my-8">
-         		Nenhuma Categoria foi encontrada!
-           	</span>
-             )}
-             <div className="grid grid-cols-1 md:grid-cols-2
-                            lg:grid-cols-3 gap-8">
-
-                 {
-                    categoria.map((categoria) => (
-    	            <CardCategoria key={categoria.id} Categoria={categoria}/>
-                   ))
-}
-              </div>
-           </div>
+  <>
+    {isLoading && (
+          <div className="flex justify-center w-full my-12">
+            <SyncLoader
+              color="#15803d"
+              size={18}
+            />
+          </div>
+        )}
+    <div className="flex justify-center w-full my-8 px-6">
+      <div className="container flex flex-col">
+        {(!isLoading && categoria.length === 0) && (
+          <span className="text-3xl text-center my-8">
+            Nenhuma Categoria foi encontrada!
+          </span>
+        )}
+        {categoria.map((categoria) => (
+          <CardCategoria key={categoria.id} Categoria={categoria} />
+        ))}
       </div>
-    
-    </>
-  )
+    </div>
+  </>
+)
 
 }
 export default ListaCategoria
