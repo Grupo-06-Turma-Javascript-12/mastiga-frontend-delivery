@@ -1,3 +1,4 @@
+import { useCarrinho } from "../../../contexts/CarrinhoContext"
 import type { Produto } from "../../../models/Produto"
 
 interface CardProdutoProps {
