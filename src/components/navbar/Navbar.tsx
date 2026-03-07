@@ -45,7 +45,8 @@ function Navbar() {
         <div className="hidden lg:flex gap-2 items-center">
           <Link to='/home' className={linkClass} style={linkStyle} onMouseEnter={onEnter} onMouseLeave={onLeave}>Home</Link>
           <Link to='/perfil' className={linkClass} style={linkStyle} onMouseEnter={onEnter} onMouseLeave={onLeave}>Perfil</Link>
-
+          <Link to='/login' className={linkClass} style={linkStyle} onMouseEnter={onEnter} onMouseLeave={onLeave}>Login</Link>
+          
           <div className="relative" onMouseEnter={() => setDropdownOpen(true)} onMouseLeave={() => setDropdownOpen(false)}>
             <Link to='/categorias' className={linkClass} style={linkStyle} onMouseEnter={onEnter} onMouseLeave={onLeave}>
               Categorias ▾
