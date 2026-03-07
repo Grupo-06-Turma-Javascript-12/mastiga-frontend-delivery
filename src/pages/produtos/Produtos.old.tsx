@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react"
-import ProdutoCard from "./components/CardProduto"
-import Carrinho from "./components/Carrinho"
-import type { ProdutoPublico } from "../../models/ProdutoPublico"
 import { produtosMock } from "../../mocks/produtosMock"
+import type { ProdutoPublico } from "../../models/ProdutoPublico"
+import Carrinho from "./components/Carrinho"
 
 interface ItemCarrinho {
   produto: ProdutoPublico

@@ -47,7 +47,6 @@ export function ToastAlerta(mensagem: string, tipo: string) {
       toast.success(mensagem, {
         ...commonOptions,
         style: baseStyle,
-        progressStyle: { background: 'rgba(255,255,255,0.4)' },
       });
       break;
 
@@ -55,7 +54,6 @@ export function ToastAlerta(mensagem: string, tipo: string) {
       toast.error(mensagem, {
         ...commonOptions,
         style: errorStyle,
-        progressStyle: { background: 'rgba(255,255,255,0.4)' },
       });
       break;
 
@@ -64,7 +62,6 @@ export function ToastAlerta(mensagem: string, tipo: string) {
       toast.info(mensagem, {
         ...commonOptions,
         style: infoStyle,
-        progressStyle: { background: 'rgba(255,255,255,0.4)' },
       });
       break;
   }
