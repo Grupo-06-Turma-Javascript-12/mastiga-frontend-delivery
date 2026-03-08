@@ -14,7 +14,7 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const navigate = useNavigate()
 
-  const linkClass = "px-4 py-2 rounded-full transition-all duration-200 font-semibold border-2"
+  const linkClass = "px-2 py-1.5 xl:px-4 xl:py-2 rounded-full transition-all duration-200 font-semibold border-2 text-sm xl:text-base whitespace-nowrap"
   const linkStyle = { color: '#ffffff', borderColor: 'rgba(255,255,255,0.4)' }
   const onEnter = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
     e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.2)'
@@ -42,7 +42,7 @@ function Navbar() {
           <img src="https://ik.imagekit.io/kef5ubks6/Logo2mastiga.webp" alt="Mastiga Delivery" className="h-8 md:h-19 w-auto object-contain" />
         </Link>
 
-        <div className="hidden lg:flex gap-2 items-center">
+        <div className="hidden lg:flex gap-1 items-center flex-nowrap">
           <Link to='/home' className={linkClass} style={linkStyle} onMouseEnter={onEnter} onMouseLeave={onLeave}>Home</Link>
           <Link to='/perfil' className={linkClass} style={linkStyle} onMouseEnter={onEnter} onMouseLeave={onLeave}>Perfil</Link>
           <Link to='/login' className={linkClass} style={linkStyle} onMouseEnter={onEnter} onMouseLeave={onLeave}>Login</Link>
@@ -76,7 +76,7 @@ function Navbar() {
           </button>
         </div>
 
-        <button className="lg:hidden flex flex-col gap-1.5 p-2" onClick={() => setMenuOpen(!menuOpen)}>
+        <button className="lg:hidden flex flex-col gap-1.5 p-2" onClick={() => { setMenuOpen(!menuOpen); setDropdownOpen(false) }}>
           <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
           <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`} />
           <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
@@ -86,6 +86,7 @@ function Navbar() {
       {menuOpen && (
         <div className="lg:hidden flex flex-col gap-2 px-8 pb-4">
           <Link to='/home' className="py-2 font-semibold border-b border-white/20 text-white/90 hover:text-white" onClick={() => setMenuOpen(false)}>Home</Link>
+          <Link to='/perfil' className="py-2 font-semibold border-b border-white/20 text-white/90 hover:text-white" onClick={() => setMenuOpen(false)}>Perfil</Link>
           <Link to='/login' className="py-2 font-semibold border-b border-white/20 text-white/90 hover:text-white" onClick={() => setMenuOpen(false)}>Login</Link>
           
           <div>
