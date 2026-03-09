@@ -158,7 +158,8 @@ Desenvolvido pelo **Grupo 06** da **Turma JavaScript 12**.
       </a><br>
       🥗
     </td>
-
+  </tr>
+</table>
 ---
 
 ## 📝 Licença
