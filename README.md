@@ -158,6 +158,11 @@ Desenvolvido pelo **Grupo 06** da **Turma JavaScript 12**.
       </a><br>
       🥗
     </td>
+
+    <p align="center">
+  Feito com ❤️ pelo Grupo 06 — Turma JavaScript 12
+</p>
+
 ---
 
 ## 📝 Licença
@@ -166,6 +171,3 @@ Este projeto foi desenvolvido para fins educacionais.
 
 ---
 
-<p align="center">
-  Feito com ❤️ pelo Grupo 06 — Turma JavaScript 12
-</p>
