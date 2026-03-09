@@ -113,7 +113,7 @@ function FormProduto() {
 
     if (id !== undefined) {
       try {
-        await atualizar(`/produtos`, produto, setProduto, {
+        await atualizar(`/produtos`, produtoParaEnviar, setProduto, {
           headers: {
             Authorization: token,
           },

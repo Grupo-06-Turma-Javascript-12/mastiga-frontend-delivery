@@ -1,5 +1,5 @@
+import { HeartIcon, LeafIcon, StarIcon, TruckIcon } from "@phosphor-icons/react";
 import { useNavigate } from "react-router-dom";
-import { HeartIcon, TruckIcon, StarIcon, LeafIcon } from "@phosphor-icons/react";
 
 type TeamCardProps = {
   name: string;
@@ -104,7 +104,7 @@ const SobreNos = () => {
       name: "Thays Peixoto",
       role: "UI/UX Designer",
       bio: "Cria experiências visuais intuitivas e agradáveis que tornam a plataforma um prazer de usar.",
-      image: "https://media.licdn.com/dms/image/v2/D4D35AQGTXW5bQG6YbA/profile-framedphoto-shrink_800_800/B4DZq3ilUBJEAg-/0/1764015887943?e=1773079200&v=beta&t=zfpuNaQ16lZ-xB7ffMr4fRKamtviZM1Sd2Sin-axPPY",
+      image: "https://media.licdn.com/dms/image/v2/D4D03AQFQGjskNARV1A/profile-displayphoto-scale_200_200/B4DZq3ik3HIkAY-/0/1764015886905?e=1774483200&v=beta&t=-uRDLH_9gk2JCV1uifbWMZc9nprusPkxNTKjah2ODfc",
       linkedin: "https://www.linkedin.com/in/thays-peixoto-da-silva/",
     },
     {
