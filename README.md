@@ -160,10 +160,17 @@ Desenvolvido pelo **Grupo 06** da **Turma JavaScript 12**.
     </td>
   </tr>
 </table>
+
+---
+
+<p align="center">
+  Feito com ❤️ e 🥗 pelo Grupo 06 — Turma JavaScript 12
+</p>
+
 ---
 
 ## 📝 Licença
 
-Este projeto foi desenvolvido para fins educacionais.
+Este projeto foi desenvolvido para fins educacionais para o bootcamp da Generation Brasil.
 
 ---
