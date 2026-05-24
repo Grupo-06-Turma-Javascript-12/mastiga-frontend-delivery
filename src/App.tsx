@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import DeletarCategoria from "./components/categoria/deletarcategoria/DeletarCategoria";
 import FormCategoria from "./components/categoria/formcategoria/FormCategoria";
 import ListaCategoria from "./components/categoria/listacategoria/ListaCategorias";
+import { Chatbot } from "./components/chatbot/chatbot";
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/navbar/Navbar";
 import DeletarProduto from "./components/produto/deletarproduto/DeletarProduto";
@@ -53,6 +54,7 @@ function AppContent() {
         </Routes>
       </div>
       <Footer />
+      <Chatbot/>
     </BrowserRouter>
   )
 }
